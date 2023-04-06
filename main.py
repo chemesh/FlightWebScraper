@@ -5,8 +5,6 @@ from kayak_manager import KayakManager
 from consts import DATE_FORMAT
 
 
-
-
 def main():
     origin = "TLV"
     dest = "ROM"
