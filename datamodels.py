@@ -23,6 +23,19 @@ class Flight:
                 f'Important Notes: {", ".join(self.warnings)} '
         )
 
+    def to_json(self):
+        return vars(self)
+
+    def to_csv(self, delimiter=','):
+        headers = ""
+        values = ""
+        for header, value in self.to_json().items():
+            headers += f'{str(header)}{delimiter}'
+            values += f'{str(value)}{delimiter}'
+        res = headers.rstrip(delimiter) + "\n"
+        res += values.rstrip(delimiter)
+        return res
+
 
 @dataclass
 class Trip:
@@ -44,6 +57,12 @@ class Trip:
             f'Provider: {self.provider}, '
             f'Link: {self.link}'
         )
+
+    def to_json(self):
+        res = vars(self)
+        res['depart_flights'] = [flight.to_json() for flight in self.depart_flights]
+        res['return_flights'] = [flight.to_json() for flight in self.return_flights]
+        return res
 
 
 

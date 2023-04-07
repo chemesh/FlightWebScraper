@@ -1,4 +1,4 @@
-
+import json
 import datetime as dt
 
 from kayak_manager import KayakManager
@@ -22,7 +22,8 @@ def main():
         passengers=num_of_passengers
     )
     all_flights = manager.get_trips()
-    print("\n".join([str(trip) for trip in all_flights]))
+    # print("\n".join([str(trip) for trip in all_flights]))
+    print(json.dumps([f.to_json() for f in all_flights], indent=4))
 
 
 if __name__ == "__main__":
